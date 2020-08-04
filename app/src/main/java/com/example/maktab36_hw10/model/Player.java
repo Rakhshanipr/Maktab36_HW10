@@ -7,15 +7,15 @@ public class Player {
     private static Player sPlayer1;
     private static Player sPlayer2;
 
-    private Player(String name, int point) {
+    public Player(String name, int point, boolean active) {
         mName = name;
         mPoint = point;
-        mActive = false;
+        mActive = active;
     }
 
-    public void run() {
-        sPlayer1 = new Player("Player 1", 0);
-        sPlayer2 = new Player("Player 2", 0);
+    public static void run() {
+        sPlayer1 = new Player("Player 1", 0,true);
+        sPlayer2 = new Player("Player 2", 0,false);
     }
 
     public static Player getPlayer1() {

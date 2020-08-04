@@ -22,12 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void fragmentManager() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_game_main_container);
+        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_game_button_container);
         if (fragment == null) {
             fragmentManager
                     .beginTransaction()
-                    .add(R.id.fragment_game_main_container, new TicTacToeFragment())
-                    .add(R.id.fragment_game_main_container, new FourInRowFragment())
                     .add(R.id.fragment_game_button_container, new GameNameButtonsFragment())
                     .commit();
         }

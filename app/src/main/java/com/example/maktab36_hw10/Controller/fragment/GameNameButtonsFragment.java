@@ -2,63 +2,73 @@ package com.example.maktab36_hw10.Controller.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.maktab36_hw10.Controller.fragment.four_in_row.FourInRowFragment;
+import com.example.maktab36_hw10.Controller.fragment.tic_tac_toe.TicTacToeFragment;
 import com.example.maktab36_hw10.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link GameNameButtonsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class GameNameButtonsFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public GameNameButtonsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GameNameButtonsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GameNameButtonsFragment newInstance(String param1, String param2) {
-        GameNameButtonsFragment fragment = new GameNameButtonsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    //region initialization
+    Button mButtonTicTacToe;
+    Button mButtonFourInRow;
+    //endregion
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game_name_buttons, container, false);
+        View view = inflater.inflate(R.layout.fragment_game_name_buttons, container, false);
+        findViews(view);
+        setListner();
+        return view;
+    }
+
+    private void setListner() {
+        mButtonTicTacToe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setTransactionFragmet(new TicTacToeFragment());
+            }
+        });
+
+        mButtonFourInRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setTransactionFragmet(new FourInRowFragment());
+            }
+        });
+    }
+
+    private void setTransactionFragmet(Fragment fragment) {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        Fragment usedFragment = fragmentManager.findFragmentById(R.id.fragment_game_main_container);
+        if (usedFragment == null) {
+            fragmentManager
+                    .beginTransaction()
+                    .add(R.id.fragment_game_main_container, fragment)
+                    .commit();
+        } else {
+            fragmentManager
+                    .beginTransaction()
+                    .remove(usedFragment)
+                    .add(R.id.fragment_game_main_container, fragment)
+                    .commit();
+        }
+    }
+
+    private void findViews(View view) {
+        mButtonFourInRow = view.findViewById(R.id.button_4_in_a_row);
+
+        mButtonTicTacToe = view.findViewById(R.id.button_tic_tac_toe);
     }
 }
