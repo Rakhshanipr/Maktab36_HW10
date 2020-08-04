@@ -5,37 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/background"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button_tic_tac_toe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="Tic tac Toe"
-            android:textAllCaps="false"
-            android:textSize="32dp"></Button>
-
-        <Button
-            android:id="@+id/button_4_in_a_row"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="4 in a Row"
-            android:textAllCaps="false"
-            android:textSize="32dp"></Button>
-
-    </LinearLayout>
+    tools:context=".Controller.activity.MainActivity">
 
     <FrameLayout
-        android:id="@+id/fragment_game_container"
+        android:id="@+id/fragment_game_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/fragment_game_main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
