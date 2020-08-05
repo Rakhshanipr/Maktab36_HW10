@@ -203,7 +203,6 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
             } else {
                 plusPlayer2();
                 disableButton();
-
                 Snackbar snackbar = Snackbar
                         .make(getView(), "Wind----> " + Player.getPlayer2().getName(), Snackbar.LENGTH_LONG);
                 snackbar.show();
@@ -215,7 +214,7 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
 
     private void disableButton() {
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j <3; j++) {
+            for (int j = 0; j < 3; j++) {
                 mImageButtons[i][j].setEnabled(false);
             }
         }

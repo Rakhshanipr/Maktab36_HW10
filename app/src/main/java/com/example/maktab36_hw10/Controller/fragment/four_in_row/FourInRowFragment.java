@@ -1,64 +1,207 @@
 package com.example.maktab36_hw10.Controller.fragment.four_in_row;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.maktab36_hw10.R;
+import com.example.maktab36_hw10.model.Player;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FourInRowFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FourInRowFragment extends Fragment {
+public class FourInRowFragment extends Fragment implements View.OnClickListener {
+    //region initialzation
+    ImageButton mButton1_1;
+    ImageButton mButton1_2;
+    ImageButton mButton1_3;
+    ImageButton mButton1_4;
+    ImageButton mButton1_5;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    ImageButton mButton2_1;
+    ImageButton mButton2_2;
+    ImageButton mButton2_3;
+    ImageButton mButton2_4;
+    ImageButton mButton2_5;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    ImageButton mButton3_1;
+    ImageButton mButton3_2;
+    ImageButton mButton3_3;
+    ImageButton mButton3_4;
+    ImageButton mButton3_5;
 
-    public FourInRowFragment() {
-        // Required empty public constructor
-    }
+    ImageButton mButton4_1;
+    ImageButton mButton4_2;
+    ImageButton mButton4_3;
+    ImageButton mButton4_4;
+    ImageButton mButton4_5;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FourInRowFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FourInRowFragment newInstance(String param1, String param2) {
-        FourInRowFragment fragment = new FourInRowFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    ImageButton mButton5_1;
+    ImageButton mButton5_2;
+    ImageButton mButton5_3;
+    ImageButton mButton5_4;
+    ImageButton mButton5_5;
+
+    ImageButton[][] mImageButtons = new ImageButton[5][5];
+
+    TextView mTextViewPlayer1Name;
+    TextView mTextViewPlayer2Name;
+    TextView mTextViewPlayer1Point;
+    TextView mTextViewPlayer2Point;
+    int[] mLastRow = {0, 0, 0, 0, 0};
+    byte[][] mColors=new byte[5][5];
+    boolean mWindPlayer1=false;
+    //endregion
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_four_in_row, container, false);
+        View view = inflater.inflate(R.layout.fragment_four_in_row, container, false);
+        findViews(view);
+        setListners();
+        initSet(true, false);
+        setImageButtonsTag();
+
+        return view;
+    }
+
+    private void setImageButtonsTag() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                mImageButtons[i][j].setTag(new int[]{i, j});
+            }
+
+        }
+    }
+
+    private void initSet(boolean b, boolean b2) {
+        Player.getPlayer1().setActive(b);
+        Player.getPlayer2().setActive(b2);
+    }
+
+    private void findViews(View view) {
+        //region buttons
+        mImageButtons[0][0] = view.findViewById(R.id.button_1_1);
+        mImageButtons[0][1] = view.findViewById(R.id.button_1_2);
+        mImageButtons[0][2] = view.findViewById(R.id.button_1_3);
+        mImageButtons[0][3] = view.findViewById(R.id.button_1_4);
+        mImageButtons[0][4] = view.findViewById(R.id.button_1_5);
+
+        mImageButtons[1][0] = view.findViewById(R.id.button_2_1);
+        mImageButtons[1][1] = view.findViewById(R.id.button_2_2);
+        mImageButtons[1][2] = view.findViewById(R.id.button_2_3);
+        mImageButtons[1][3] = view.findViewById(R.id.button_2_4);
+        mImageButtons[1][4] = view.findViewById(R.id.button_2_5);
+
+
+        mImageButtons[2][0] = view.findViewById(R.id.button_3_1);
+        mImageButtons[2][1] = view.findViewById(R.id.button_3_2);
+        mImageButtons[2][2] = view.findViewById(R.id.button_3_3);
+        mImageButtons[2][3] = view.findViewById(R.id.button_3_4);
+        mImageButtons[2][4] = view.findViewById(R.id.button_3_5);
+
+
+        mImageButtons[3][0] = view.findViewById(R.id.button_4_1);
+        mImageButtons[3][1] = view.findViewById(R.id.button_4_2);
+        mImageButtons[3][2] = view.findViewById(R.id.button_4_3);
+        mImageButtons[3][3] = view.findViewById(R.id.button_4_4);
+        mImageButtons[3][4] = view.findViewById(R.id.button_4_5);
+
+        mImageButtons[4][0] = view.findViewById(R.id.button_5_1);
+        mImageButtons[4][1] = view.findViewById(R.id.button_5_2);
+        mImageButtons[4][2] = view.findViewById(R.id.button_5_3);
+        mImageButtons[4][3] = view.findViewById(R.id.button_5_4);
+        mImageButtons[4][4] = view.findViewById(R.id.button_5_5);
+//endregion
+        //region editext
+        mTextViewPlayer1Name = view.findViewById(R.id.edittext_player1);
+        mTextViewPlayer2Name = view.findViewById(R.id.edittext_player2);
+        mTextViewPlayer1Point = view.findViewById(R.id.edittext_player1_point);
+        mTextViewPlayer2Point = view.findViewById(R.id.edittext_player2_point);
+        //endregion
+    }
+
+    private void setListners() {
+        mImageButtons[0][0].setOnClickListener(this);
+        mImageButtons[0][1].setOnClickListener(this);
+        mImageButtons[0][2].setOnClickListener(this);
+        mImageButtons[0][3].setOnClickListener(this);
+        mImageButtons[0][4].setOnClickListener(this);
+
+
+        mImageButtons[1][0].setOnClickListener(this);
+        mImageButtons[1][1].setOnClickListener(this);
+        mImageButtons[1][2].setOnClickListener(this);
+        mImageButtons[1][3].setOnClickListener(this);
+        mImageButtons[1][4].setOnClickListener(this);
+
+
+        mImageButtons[2][0].setOnClickListener(this);
+        mImageButtons[2][1].setOnClickListener(this);
+        mImageButtons[2][2].setOnClickListener(this);
+        mImageButtons[2][3].setOnClickListener(this);
+        mImageButtons[2][4].setOnClickListener(this);
+
+
+        mImageButtons[3][0].setOnClickListener(this);
+        mImageButtons[3][1].setOnClickListener(this);
+        mImageButtons[3][2].setOnClickListener(this);
+        mImageButtons[3][3].setOnClickListener(this);
+        mImageButtons[3][4].setOnClickListener(this);
+
+        mImageButtons[4][0].setOnClickListener(this);
+        mImageButtons[4][1].setOnClickListener(this);
+        mImageButtons[4][2].setOnClickListener(this);
+        mImageButtons[4][3].setOnClickListener(this);
+        mImageButtons[4][4].setOnClickListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateEdittext();
+    }
+
+    private void updateEdittext() {
+        mTextViewPlayer1Name.setText(Player.getPlayer1().getName());
+        mTextViewPlayer2Name.setText(Player.getPlayer2().getName());
+        mTextViewPlayer1Point.setText(Integer.toString(Player.getPlayer1().getPoint()));
+        mTextViewPlayer2Point.setText(Integer.toString(Player.getPlayer2().getPoint()));
+    }
+
+    private boolean isEnd(){
+        
+
+
+        return false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        ImageButton imageButton = (ImageButton) view;
+        int i = ((int[]) imageButton.getTag())[0], j = ((int[]) imageButton.getTag())[1];
+        if (mLastRow[j] >= 5) {
+            return;
+        }
+        if (Player.getPlayer1().isActive()) {
+            mImageButtons[mLastRow[j]][j].setImageResource(R.mipmap.red);
+            mColors[i][j]=1;
+            initSet(false, true);
+        } else {
+            mImageButtons[mLastRow[j]][j].setImageResource(R.mipmap.blue);
+            mColors[i][j]=100;
+            initSet(true, false);
+        }
+        mLastRow[j]++;
     }
 }

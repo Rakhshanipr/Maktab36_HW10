@@ -6,6 +6,6 @@
     <color name="background">#7D8A89</color>
     <color name="button">#73C8C2</color>
     <color name="tic_tac_toe_background">#00BCD4</color>
+    <color name="four_in_a_row">#47B34C</color>
     <color name="dark">#000000</color>
-
 </resources>
