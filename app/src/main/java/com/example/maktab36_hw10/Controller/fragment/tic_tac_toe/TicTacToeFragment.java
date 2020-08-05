@@ -1,5 +1,6 @@
 package com.example.maktab36_hw10.Controller.fragment.tic_tac_toe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -28,7 +29,6 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
 //    ImageButton mButton3_3;
     ImageButton[][] mImageButtons = new ImageButton[3][3];
     boolean mIsPlayer1Wind = false;
-    boolean[] clicked = new boolean[10];
     TextView mTextViewPlayer1Name;
     TextView mTextViewPlayer2Name;
     TextView mTextViewPlayer1Point;
@@ -48,7 +48,6 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
         setListner();
         initSet(true, false);
         updateEdittext();
-
         return view;
     }
 
@@ -234,6 +233,7 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
     public void onResume() {
         super.onResume();
         updateEdittext();
+
     }
 
     private void updateEdittext() {

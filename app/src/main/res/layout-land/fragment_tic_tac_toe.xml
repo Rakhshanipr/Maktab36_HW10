@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:background="@color/tic_tac_toe_background"
+    android:gravity="top"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center"
+        android:gravity="top|center"
+        android:text="Game: Tic Tac Toe"
+        android:textColor="@color/dark"
+        android:textSize="28dp"></TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/button_1_1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+
+            ></ImageButton>
+
+        <ImageButton
+            android:id="@+id/button_1_2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/button_1_3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageButton>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/edittext_player1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="player 1   "
+            android:textColor="@color/dark"
+            android:textSize="22dp"></TextView>
+
+        <TextView
+            android:id="@+id/edittext_player1_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/dark"
+            android:textSize="32dp"></TextView>
+
+        <ImageButton
+            android:id="@+id/button_2_1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/button_2_2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/button_2_3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageButton>
+
+        <TextView
+            android:id="@+id/edittext_player2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="player 2   "
+            android:textColor="@color/dark"
+            android:textSize="22dp"></TextView>
+
+        <TextView
+            android:id="@+id/edittext_player2_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/dark"
+            android:textSize="32dp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/button_3_1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/button_3_2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/button_3_3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"></ImageButton>
+    </LinearLayout>
+</LinearLayout>

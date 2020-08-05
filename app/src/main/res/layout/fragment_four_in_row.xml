@@ -60,7 +60,6 @@
 
     </LinearLayout>
 
-    <!--buttons-->
 
     <LinearLayout
         android:layout_width="wrap_content"

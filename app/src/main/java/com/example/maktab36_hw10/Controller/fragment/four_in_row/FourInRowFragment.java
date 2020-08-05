@@ -17,45 +17,15 @@ import com.example.maktab36_hw10.model.Player;
 
 public class FourInRowFragment extends Fragment implements View.OnClickListener {
     //region initialzation
-    ImageButton mButton1_1;
-    ImageButton mButton1_2;
-    ImageButton mButton1_3;
-    ImageButton mButton1_4;
-    ImageButton mButton1_5;
-
-    ImageButton mButton2_1;
-    ImageButton mButton2_2;
-    ImageButton mButton2_3;
-    ImageButton mButton2_4;
-    ImageButton mButton2_5;
-
-    ImageButton mButton3_1;
-    ImageButton mButton3_2;
-    ImageButton mButton3_3;
-    ImageButton mButton3_4;
-    ImageButton mButton3_5;
-
-    ImageButton mButton4_1;
-    ImageButton mButton4_2;
-    ImageButton mButton4_3;
-    ImageButton mButton4_4;
-    ImageButton mButton4_5;
-
-    ImageButton mButton5_1;
-    ImageButton mButton5_2;
-    ImageButton mButton5_3;
-    ImageButton mButton5_4;
-    ImageButton mButton5_5;
-
     ImageButton[][] mImageButtons = new ImageButton[5][5];
 
     TextView mTextViewPlayer1Name;
     TextView mTextViewPlayer2Name;
     TextView mTextViewPlayer1Point;
     TextView mTextViewPlayer2Point;
-    int[] mLastRow = {0, 0, 0, 0, 0};
-    int[][] mColors = new int[5][5];
-    boolean mWindPlayer1 = false;
+    static int[] mLastRow = {0, 0, 0, 0, 0};
+    static int[][] mColors = new int[5][5];
+    static boolean mWindPlayer1 = false;
 
     //endregion
 

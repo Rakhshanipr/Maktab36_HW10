@@ -1,21 +1,30 @@
 package com.example.maktab36_hw10.model;
 
+import android.widget.ImageButton;
+
 public class Player {
     private String mName;
     private int mPoint;
     private boolean mActive;
     private static Player sPlayer1;
     private static Player sPlayer2;
+    private static boolean isCreated = false;
+    public static ImageButton[][] mImageButtons;
 
-    public Player(String name, int point, boolean active) {
+    private Player(String name, int point, boolean active) {
+
         mName = name;
         mPoint = point;
         mActive = active;
+
     }
 
     public static void run() {
-        sPlayer1 = new Player("Player 1", 0,true);
-        sPlayer2 = new Player("Player 2", 0,false);
+        if (isCreated == false) {
+            sPlayer1 = new Player("Player 1   ", 0, true);
+            sPlayer2 = new Player("Player 2   ", 0, false);
+            isCreated = true;
+        }
     }
 
     public static Player getPlayer1() {
