@@ -2,6 +2,7 @@ package com.example.maktab36_hw10.Controller.fragment.four_in_row;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.maktab36_hw10.R;
 import com.example.maktab36_hw10.model.Player;
@@ -52,8 +54,9 @@ public class FourInRowFragment extends Fragment implements View.OnClickListener 
     TextView mTextViewPlayer1Point;
     TextView mTextViewPlayer2Point;
     int[] mLastRow = {0, 0, 0, 0, 0};
-    byte[][] mColors=new byte[5][5];
-    boolean mWindPlayer1=false;
+    int[][] mColors = new int[5][5];
+    boolean mWindPlayer1 = false;
+
     //endregion
 
     @Override
@@ -62,6 +65,13 @@ public class FourInRowFragment extends Fragment implements View.OnClickListener 
 
     }
 
+    private void disableButton() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                mImageButtons[i][j].setEnabled(false);
+            }
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +92,16 @@ public class FourInRowFragment extends Fragment implements View.OnClickListener 
             }
 
         }
+    }
+
+    private void plusPlayer1() {
+        Player.getPlayer1().setPoint(Player.getPlayer1().getPoint() + 1);
+        updateEdittext();
+    }
+
+    private void plusPlayer2() {
+        Player.getPlayer2().setPoint(Player.getPlayer2().getPoint() + 1);
+        updateEdittext();
     }
 
     private void initSet(boolean b, boolean b2) {
@@ -179,8 +199,39 @@ public class FourInRowFragment extends Fragment implements View.OnClickListener 
         mTextViewPlayer2Point.setText(Integer.toString(Player.getPlayer2().getPoint()));
     }
 
-    private boolean isEnd(){
-        
+    private boolean isEnd() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 2; j++) {
+                int count = 0;
+                for (int k = j; k < j + 4; k++) {
+                    count += mColors[i][k];
+                }
+                if (count == 4) {
+                    mWindPlayer1 = true;
+                    return true;
+                }
+                if (count == 400) {
+                    mWindPlayer1 = false;
+                    return true;
+                }
+            }
+        }
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 2; j++) {
+                int count = 0;
+                for (int k = j; k < j + 4; k++) {
+                    count += mColors[k][i];
+                }
+                if (count == 4) {
+                    mWindPlayer1 = true;
+                    return true;
+                }
+                if (count == 400) {
+                    mWindPlayer1 = false;
+                    return true;
+                }
+            }
+        }
 
 
         return false;
@@ -195,13 +246,30 @@ public class FourInRowFragment extends Fragment implements View.OnClickListener 
         }
         if (Player.getPlayer1().isActive()) {
             mImageButtons[mLastRow[j]][j].setImageResource(R.mipmap.red);
-            mColors[i][j]=1;
+            mColors[mLastRow[j]][j] = 1;
             initSet(false, true);
         } else {
             mImageButtons[mLastRow[j]][j].setImageResource(R.mipmap.blue);
-            mColors[i][j]=100;
+            mColors[mLastRow[j]][j] = 100;
             initSet(true, false);
         }
         mLastRow[j]++;
+        if (isEnd()) {
+            if (mWindPlayer1) {
+                plusPlayer1();
+                disableButton();
+                Snackbar snackbar = Snackbar
+                        .make(getView(), "Wind----> " + Player.getPlayer1().getName(), Snackbar.LENGTH_LONG);
+                snackbar.show();
+
+            } else {
+                plusPlayer2();
+                disableButton();
+                Snackbar snackbar = Snackbar
+                        .make(getView(), "Wind----> " + Player.getPlayer2().getName(), Snackbar.LENGTH_LONG);
+                snackbar.show();
+
+            }
+        }
     }
 }
