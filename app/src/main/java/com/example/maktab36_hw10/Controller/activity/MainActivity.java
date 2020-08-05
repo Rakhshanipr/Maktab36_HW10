@@ -9,6 +9,7 @@ import com.example.maktab36_hw10.Controller.fragment.GameNameButtonsFragment;
 import com.example.maktab36_hw10.Controller.fragment.four_in_row.FourInRowFragment;
 import com.example.maktab36_hw10.Controller.fragment.tic_tac_toe.TicTacToeFragment;
 import com.example.maktab36_hw10.R;
+import com.example.maktab36_hw10.model.Player;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Player.run();
         fragmentManager();
         initSitting();
     }

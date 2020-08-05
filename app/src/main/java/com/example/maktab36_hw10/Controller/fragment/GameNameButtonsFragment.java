@@ -16,6 +16,7 @@ public class GameNameButtonsFragment extends Fragment {
     //region initialization
     Button mButtonTicTacToe;
     Button mButtonFourInRow;
+    Button mButtonSetting;
     //endregion
 
     @Override
@@ -47,6 +48,13 @@ public class GameNameButtonsFragment extends Fragment {
                 setTransactionFragmet(new FourInRowFragment());
             }
         });
+
+        mButtonSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setTransactionFragmet(new SettingFragment());
+            }
+        });
     }
 
     private void setTransactionFragmet(Fragment fragment) {
@@ -68,7 +76,7 @@ public class GameNameButtonsFragment extends Fragment {
 
     private void findViews(View view) {
         mButtonFourInRow = view.findViewById(R.id.button_4_in_a_row);
-
+        mButtonSetting=view.findViewById(R.id.button_setting);
         mButtonTicTacToe = view.findViewById(R.id.button_tic_tac_toe);
     }
 }

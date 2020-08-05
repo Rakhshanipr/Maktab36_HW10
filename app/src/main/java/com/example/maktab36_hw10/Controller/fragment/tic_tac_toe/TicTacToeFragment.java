@@ -1,13 +1,13 @@
 package com.example.maktab36_hw10.Controller.fragment.tic_tac_toe;
 
-import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maktab36_hw10.R;
@@ -29,6 +29,10 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
     ImageButton[][] mImageButtons = new ImageButton[3][3];
     boolean mIsPlayer1Wind = false;
     boolean[] clicked = new boolean[10];
+    TextView mTextViewPlayer1Name;
+    TextView mTextViewPlayer2Name;
+    TextView mTextViewPlayer1Point;
+    TextView mTextViewPlayer2Point;
     //endregion
 
     @Override
@@ -41,9 +45,15 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tic_tac_toe, container, false);
         findViews(view);
-        Player.run();
         setListner();
+        initSet(true, false);
+        updateEdittext();
         return view;
+    }
+
+    private void initSet(boolean b, boolean b2) {
+        Player.getPlayer1().setActive(b);
+        Player.getPlayer2().setActive(b2);
     }
 
     private void setListner() {
@@ -68,6 +78,11 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
         mImageButtons[2][0] = view.findViewById(R.id.button_3_1);
         mImageButtons[2][1] = view.findViewById(R.id.button_3_2);
         mImageButtons[2][2] = view.findViewById(R.id.button_3_3);
+        mTextViewPlayer1Name = view.findViewById(R.id.edittext_player1);
+        mTextViewPlayer2Name = view.findViewById(R.id.edittext_player2);
+        mTextViewPlayer1Point = view.findViewById(R.id.edittext_player1_point);
+        mTextViewPlayer2Point = view.findViewById(R.id.edittext_player2_point);
+
     }
 
     private boolean isEnd() {
@@ -142,8 +157,8 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
 
 
         for (int i = 0; i < 3; i++) {
-            if (mImageButtons[i][(2-i)].getTag() != null) {
-                count += (int) mImageButtons[i][(2-i)].getTag();
+            if (mImageButtons[i][(2 - i)].getTag() != null) {
+                count += (int) mImageButtons[i][(2 - i)].getTag();
                 isUsed = true;
             } else {
                 isUsed = false;
@@ -165,16 +180,12 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
         ImageButton b = (ImageButton) view;
         if (b.getTag() == null) {
-
-
             if (Player.getPlayer1().isActive()) {
-                Player.getPlayer1().setActive(false);
-                Player.getPlayer2().setActive(true);
+                initSet(false, true);
                 b.setImageResource(R.mipmap.circl);
                 b.setTag(0);
             } else {
-                Player.getPlayer1().setActive(true);
-                Player.getPlayer2().setActive(false);
+                initSet(true, false);
                 b.setImageResource(R.mipmap.multiple);
                 b.setTag(1);
             }
@@ -182,12 +193,43 @@ public class TicTacToeFragment extends Fragment implements View.OnClickListener 
         }
         if (isEnd()) {
             if (mIsPlayer1Wind) {
-                Toast.makeText(getActivity(), "player 1", Toast.LENGTH_SHORT).show();
+                plusPlayer1();
+                Snackbar snackbar = Snackbar
+                        .make(getView(), "Wind----> " + Player.getPlayer1().getName(), Snackbar.LENGTH_LONG);
+                snackbar.show();
+                onPause();
             } else {
-                Toast.makeText(getActivity(), "player 2", Toast.LENGTH_SHORT).show();
+                plusPlayer2();
+                Snackbar snackbar = Snackbar
+                        .make(getView(), "Wind----> " + Player.getPlayer2().getName(), Snackbar.LENGTH_LONG);
+                snackbar.show();
+                this.onPause();
+
             }
         }
 
     }
 
+    private void plusPlayer1() {
+        Player.getPlayer1().setPoint(Player.getPlayer1().getPoint() + 1);
+        updateEdittext();
+    }
+
+    private void plusPlayer2() {
+        Player.getPlayer2().setPoint(Player.getPlayer2().getPoint() + 1);
+        updateEdittext();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateEdittext();
+    }
+
+    private void updateEdittext() {
+        mTextViewPlayer1Name.setText(Player.getPlayer1().getName());
+        mTextViewPlayer2Name.setText(Player.getPlayer2().getName());
+        mTextViewPlayer1Point.setText(Integer.toString(Player.getPlayer1().getPoint()));
+        mTextViewPlayer2Point.setText(Integer.toString(Player.getPlayer2().getPoint()));
+    }
 }
